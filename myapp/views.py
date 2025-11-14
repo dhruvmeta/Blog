@@ -213,6 +213,8 @@ class PostCommentView(APIView):
 
 class SubscribeView(APIView):
 
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, pk):
         user = request.user
         try:
@@ -227,7 +229,7 @@ class SubscribeView(APIView):
         return Response({'detail': 'Subscription created successfully.'}, status=201)
     
 class UnsubscribeView(APIView):
-
+    permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
         user = request.user
@@ -270,7 +272,7 @@ class UserFeedView(APIView):
         return Response(serializer.data)
     
 class NotificationListAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """
@@ -286,7 +288,7 @@ class NotificationListAPIView(APIView):
         return Response(serializer.data)
 
 class NotificationMarkAllReadAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         """
